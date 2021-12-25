@@ -1,6 +1,7 @@
 const connection = require("../../db/db");
 const bcrypt = require("bcrypt");
 
+// register seller function
 const registerSeller = async (req, res) => {
   let { firstName, lastName, email, password, location, goods_type } = req.body;
   const salt = 10;
@@ -19,6 +20,7 @@ const registerSeller = async (req, res) => {
   });
 };
 
+// get all seller
 const getAllSeller = (req, res) => {
   const query = "SELECT * FROM seller";
   connection.query(query, (err, result) => {
@@ -27,6 +29,7 @@ const getAllSeller = (req, res) => {
   });
 };
 
+// get seller based on id
 const getSellerById = (req, res) => {
   const id = req.params.id;
   console.log(id, "iiidddd");

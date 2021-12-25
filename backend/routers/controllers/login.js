@@ -21,7 +21,7 @@ const login = async (req, res) => {
     if (confirm) {
       const payload = {
         name: result[0].name,
-        password: result[0].password,
+        idUser: result[0].id,
       };
       const options = {
         expiresIn: "1d",
