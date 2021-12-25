@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 const sellerRouter = require("./routers/routes/seller");
 const buyerRouter = require("./routers/routes/buyer");
-const loginRouter = require("./routers/routes/buyer");
+const loginRouter = require("./routers/routes/login");
 app.use("/seller", sellerRouter);
 app.use("/buyer", buyerRouter);
 app.use("/login", loginRouter);

@@ -1,13 +1,19 @@
 const connection = require("../../db/db");
+const bcrypt = require("bcrypt");
 
-const registerSeller = (req, res) => {
-  const { firstName, lastName, email, password, location, goods_type } =
-    req.body;
+const registerSeller = async (req, res) => {
+  let { firstName, lastName, email, password, location, goods_type } = req.body;
+  const salt = 10;
+  password = await bcrypt.hash(password, salt);
   const data = [firstName, lastName, email, password, location, goods_type];
+  console.log(password, "password");
   const query =
     "INSERT INTO seller (firstName, lastName, email, password, location, goods_type) VALUES (?,?,?,?,?,?);";
   connection.query(query, data, (err, result) => {
-    if (err) throw err;
+    if (err) {
+      return res.json({ message: err.message });
+    }
+
     console.log("vvf", result);
     res.json(result);
   });
