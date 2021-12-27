@@ -7,7 +7,7 @@ const registerBuyer = (req, res) => {
     "INSERT INTO buyer (firstName, lastName, password, email) VALUES (?,?,?,?)";
   connection.query(query, data, (err, result) => {
     if (err) {
-      return res.json({ message: error.message });
+      return res.json({ message: err.message });
     }
     res.json(result);
   });

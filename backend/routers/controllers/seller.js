@@ -3,13 +3,22 @@ const bcrypt = require("bcrypt");
 
 // register seller function
 const registerSeller = async (req, res) => {
-  let { firstName, lastName, email, password, location, goods_type } = req.body;
+  let { firstName, lastName, email, password, location, goods_type, img } =
+    req.body;
   const salt = 10;
   password = await bcrypt.hash(password, salt);
-  const data = [firstName, lastName, email, password, location, goods_type];
+  const data = [
+    firstName,
+    lastName,
+    email,
+    password,
+    location,
+    goods_type,
+    img,
+  ];
   console.log(password, "password");
   const query =
-    "INSERT INTO seller (firstName, lastName, email, password, location, goods_type) VALUES (?,?,?,?,?,?);";
+    "INSERT INTO seller (firstName, lastName, email, password, location, goods_type,img) VALUES (?,?,?,?,?,?,?);";
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.json({ message: err.message });

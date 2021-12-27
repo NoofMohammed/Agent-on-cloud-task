@@ -1,0 +1,9 @@
+button.btn.btn-primary {
+  width: 58%;
+  color: #1c6dd0;
+  background-color: #a3e4db;
+}
+.cards {
+  display: flex;
+  justify-content: space-around;
+}

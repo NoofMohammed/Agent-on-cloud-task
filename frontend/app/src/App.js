@@ -2,7 +2,9 @@ import "./App.css";
 import Home from "./components/Home/index";
 import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginBuyer from "./components/LoginBuyer/index";
+import Login from "./components/Login/index";
+import Register from "./components/Register/index";
+import ShowSellers from "./components/Seller";
 
 const App = () => {
   return (
@@ -10,14 +12,13 @@ const App = () => {
       <Router>
         {<Navigation />}
         <Routes>
-          <Route exact path="/home" element={<Home />}></Route>
-          <Route exact path="/loginBuyer" element={<LoginBuyer />}></Route>
-          {/* <Route path="/login" element={<Login />}></Route> */}
-          {/* <Route path="/signUp" element={<SignUp />}></Route> */}
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/login/:type" element={<Login />}></Route>
+          <Route exact path="/register/:type" element={<Register />}></Route>
+
+          <Route exact path="/allSeller" element={<ShowSellers />}></Route>
         </Routes>
       </Router>
-      <div className="App">Hello</div>
-      {/* <Home /> */}
     </>
   );
 };

@@ -3,6 +3,8 @@ const cors = require("cors");
 const db = require("./db/db");
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 const sellerRouter = require("./routers/routes/seller");
 const buyerRouter = require("./routers/routes/buyer");
 const loginRouter = require("./routers/routes/login");

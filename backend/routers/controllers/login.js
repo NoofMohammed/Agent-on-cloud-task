@@ -13,7 +13,7 @@ const login = async (req, res) => {
 
   connection.query(query, data, async (err, result) => {
     console.log(result, "login");
-    if (!result[0]) {
+    if (!result) {
       return res.status(404).json("the email doesn't exist");
     }
     const confirm = await bcrypt.compare(password, result[0].password);

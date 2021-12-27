@@ -8,6 +8,7 @@ CREATE TABLE seller (
     email VARCHAR(255) UNIQUE,
     location VARCHAR(255),
     goods_type VARCHAR(255), 
+    img VARCHAR(255), 
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
