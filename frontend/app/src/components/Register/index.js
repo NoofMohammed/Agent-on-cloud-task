@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
 
-  const { type } = useParams();
+  const { userType } = useParams();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,10 +16,9 @@ const Register = () => {
   const [location, setLocation] = useState("");
   const [goods_type, setGoods_type] = useState("");
   const [img, setImg] = useState("");
-  const [userType, setUserType] = useState("seller");
 
-  const newSeller = () => {
-    console.log(type, "type");
+  const newUser = () => {
+    console.log(userType, "userType");
 
     console.log("dddd");
     if (
@@ -43,18 +42,18 @@ const Register = () => {
         })
         .then((result) => {
           console.log(result.data, "seeler");
+          navigate(`/login/${userType}`);
         })
         .catch((err) => {
           console.log(err);
         });
-      navigate("/login/:type");
     }
   };
 
   return (
     <div>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>First name</Form.Label>
           <Form.Control
             type="text"
@@ -65,7 +64,7 @@ const Register = () => {
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>last name</Form.Label>
           <Form.Control
             type="text"
@@ -76,7 +75,7 @@ const Register = () => {
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -98,43 +97,45 @@ const Register = () => {
             }}
           />
         </Form.Group>
-        <div className="forms">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter location"
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Goods type</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter goods type"
-              onChange={(e) => {
-                setGoods_type(e.target.value);
-              }}
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Image</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter image"
-              onChange={(e) => {
-                setImg(e.target.value);
-              }}
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
-        </div>
+        {userType === "seller" ? (
+          <div className="forms">
+            <Form.Group className="mb-3">
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter location"
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                }}
+              />
+              <Form.Text className="text-muted"></Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Goods type</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter goods type"
+                onChange={(e) => {
+                  setGoods_type(e.target.value);
+                }}
+              />
+              <Form.Text className="text-muted"></Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter image"
+                onChange={(e) => {
+                  setImg(e.target.value);
+                }}
+              />
+              <Form.Text className="text-muted"></Form.Text>
+            </Form.Group>
+          </div>
+        ) : null}
 
-        <Button variant="primary" onClick={newSeller}>
+        <Button variant="primary" onClick={newUser}>
           Register
         </Button>
       </Form>

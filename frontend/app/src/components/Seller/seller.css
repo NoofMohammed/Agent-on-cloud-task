@@ -7,3 +7,18 @@ button.btn.btn-primary {
   display: flex;
   justify-content: space-around;
 }
+img.card-img-top {
+  height: 40%;
+}
+svg.bi.bi {
+  color: brown;
+  margin-bottom: 4px;
+
+  margin-right: 19px;
+}
+button.btn.btn-primary {
+  width: 58%;
+  color: black;
+  background-color: snow;
+  border-color: brown;
+}

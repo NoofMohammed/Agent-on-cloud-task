@@ -23,6 +23,8 @@ CREATE TABLE buyer (
 );
 CREATE TABLE appointment (
     id INT AUTO_INCREMENT NOT NULL,
+    time VARCHAR(255),
+    date VARCHAR(255),
     seller_id INT,
     FOREIGN KEY (seller_id) REFERENCES seller(id),
     buyer_id INT,

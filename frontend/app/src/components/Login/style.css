@@ -1,0 +1,16 @@
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.login {
+  width: 39%;
+  padding: 47px;
+  border: solid 1px rgb(219 222 225);
+  border-radius: 5px;
+}
+.login_form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -1,9 +1,10 @@
 const connection = require("../../db/db");
 
 const creatAppointment = (req, res) => {
-  const { buyer_id, seller_id } = req.body;
-  const data = [buyer_id, seller_id];
-  const query = "INSERT INTO appointment (buyer_id, seller_id) VALUES (?,?)";
+  const { time, date, buyer_id, seller_id } = req.body;
+  const data = [time, date, buyer_id, seller_id];
+  const query =
+    "INSERT INTO appointment (time,date,buyer_id, seller_id ) VALUES (?,?,?,?)";
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.json({ message: err.message });
@@ -21,6 +22,21 @@ const getAllAppointment = (req, res) => {
     res.json(result);
   });
 };
+const allAppointment = (req, res) => {
+  const { seller_id } = req.params;
+  const query = `SELECT *
+  FROM buyer 
+  INNER JOIN appointment
+  ON  buyer.id = appointment.buyer_id
+  WHERE seller_id =${seller_id}`;
+  connection.query(query, seller_id, (err, result) => {
+    if (err) {
+      return res.json({ message: err.message });
+    }
+    res.json(result);
+  });
+};
+
 const getAppointmentById = (req, res) => {
   const id = req.params.id;
   const query = `SELECT * FROM appointment WHERE id=?`;
@@ -36,4 +52,5 @@ module.exports = {
   creatAppointment,
   getAllAppointment,
   getAppointmentById,
+  allAppointment,
 };
