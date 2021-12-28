@@ -3,20 +3,24 @@ import { Card, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
 import "./seller.css";
 import { useNavigate } from "react-router-dom";
-import Booking from "../appointment/index";
-
 const ShowSellers = () => {
-  // add token
+  const navigate = useNavigate();
   const [sellers, setSellers] = useState([]);
-
+  // const [sellerId, setSellerId] = useState("");
   const getSellers = (goods) => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      authorization: `Bearer ${token}`,
+    };
+
     const url = !goods
       ? "http://localhost:5000/seller"
       : `http://localhost:5000/seller?goods=${goods}`;
     axios
-      .get(url)
+      .get(url, { headers })
       .then((result) => {
         setSellers(result.data);
+        console.log(sellers, "seller");
       })
       .catch((err) => {
         console.log(err);
@@ -25,6 +29,7 @@ const ShowSellers = () => {
   useEffect(() => {
     getSellers();
   }, []);
+
   let timeOut;
   const searchBy = (goods) => {
     clearTimeout(timeOut);
@@ -33,12 +38,9 @@ const ShowSellers = () => {
       console.log(goods);
       getSellers(goods);
     }, 1000);
-
-    // console.log("searccchhhhhhhhhhhhhhhh");
-    // if (search !== "") {
-    //   setSellers([...sellers, search]);
-    //   setSearch("");
-    // }
+  };
+  const booking = (sellerId) => {
+    navigate(`/booking/${sellerId}`);
   };
   return (
     <>
@@ -46,13 +48,11 @@ const ShowSellers = () => {
         placeholder="Search"
         aria-label="Search"
         aria-describedby="basic-addon2"
-        // value={search}
         onChange={(e) => searchBy(e.target.value)}
       />
 
       <div className="cards">
         {sellers.map((seller) => {
-          console.log(seller, "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", seller.img);
           return (
             <Card style={{ width: "18rem" }} key={seller.id}>
               <Card.Img variant="top" src={seller.img} />
@@ -118,7 +118,7 @@ const ShowSellers = () => {
                   </span>{" "}
                   {seller.location}
                 </Card.Text>
-                <Button variant="primary" onClick={Booking}>
+                <Button variant="primary" onClick={() => booking(seller.id)}>
                   Go booking
                 </Button>
               </Card.Body>

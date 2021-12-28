@@ -9,7 +9,6 @@ CREATE TABLE seller (
     location VARCHAR(255),
     goods_type VARCHAR(255), 
     img VARCHAR(255), 
-    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
 CREATE TABLE buyer (
@@ -18,17 +17,15 @@ CREATE TABLE buyer (
     lastName VARCHAR(255),
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
-    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );
 CREATE TABLE appointment (
     id INT AUTO_INCREMENT NOT NULL,
-    time VARCHAR(255),
-    date VARCHAR(255),
+    timeStamp TIMESTAMP,
+    state VARCHAR(255),
     seller_id INT,
     FOREIGN KEY (seller_id) REFERENCES seller(id),
     buyer_id INT,
     FOREIGN KEY (buyer_id) REFERENCES buyer(id),
-    is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (id)
 );

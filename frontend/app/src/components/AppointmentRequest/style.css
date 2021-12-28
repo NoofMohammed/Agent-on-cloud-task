@@ -8,3 +8,7 @@ button.but_table.btn.btn-primary {
   display: flex;
   justify-content: space-around;
 }
+.response {
+  display: flex;
+  justify-content: space-between;
+}

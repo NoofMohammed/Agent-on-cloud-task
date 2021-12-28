@@ -13,6 +13,7 @@ const login = async (req, res) => {
     if (!result) {
       return res.status(404).json("the email doesn't exist");
     }
+    console.log(password, result[0].password, "jjjjjjjjjjjj");
     const confirm = await bcrypt.compare(password, result[0].password);
     if (confirm) {
       const payload = {

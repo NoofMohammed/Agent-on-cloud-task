@@ -12,18 +12,20 @@ const Login = () => {
   console.log({ userType });
   const login = () => {
     axios
-      .post("http://localhost:5000/login", {
+      .post(`http://localhost:5000/login`, {
         email,
         password,
         userType: userType,
       })
       .then((result) => {
         const { data } = result;
-        console.log(result, "seeler");
+        console.log(data, "seeler");
         console.log(data.userId, "user.id");
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
         if (userType === "seller") {
-          navigate(`/allRequest/${data.userId}`);
+          console.log("llll");
+          navigate(`/myRequest/${data.userId}`);
         }
         if (userType === "buyer") {
           navigate("/allSeller");

@@ -1,10 +1,11 @@
 const connection = require("../../db/db");
 // creat appointment for booking appointment
 const creatAppointment = (req, res) => {
-  const { time, date, buyer_id, seller_id } = req.body;
-  const data = [time, date, buyer_id, seller_id];
+  const { timeStamp, state, buyer_id, seller_id } = req.body;
+  console.log(req.body, "ffffffffffffffffffffffffffffff");
+  const data = [timeStamp, state, buyer_id, seller_id];
   const query =
-    "INSERT INTO appointment (time,date,buyer_id, seller_id ) VALUES (?,?,?,?)";
+    "INSERT INTO appointment ( timeStamp, state, buyer_id, seller_id) VALUES (?,?,?,?)";
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.json({ message: err.message });

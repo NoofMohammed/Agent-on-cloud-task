@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Button, Table } from "react-bootstrap";
+import { Card, Button, Table } from "react-bootstrap";
 
 import "./style.css";
 //appointment requests that show to seller
 const AppointmentRequest = () => {
-  const { seller_id } = useParams();
+  const { sellerId } = useParams();
 
   const [appointments, setAppointments] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/appointment/booking/${seller_id}`)
+      .get(`http://localhost:5000/appointment/booking/${sellerId}`)
       .then((result) => {
         setAppointments(result.data);
         console.log(result, "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
@@ -22,49 +22,28 @@ const AppointmentRequest = () => {
   }, []);
   return (
     <>
-      <div>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Email</th>
-              <th>Time</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-        </Table>
-        {appointments.map((appointment) => {
-          console.log(appointment, "llllllllllllllllllll");
-          return (
-            <div className="container">
-              <div className="table">
-                <Table striped bordered hover>
-                  <tbody key={appointment.id}>
-                    <tr>
-                      <td>{appointment.id}</td>
-                      <td>
-                        {appointment.firstName} {appointment.lastName}
-                      </td>
-                      <td>{appointment.email}</td>
-                      <td>{appointment.time}</td>
-                      <td>{appointment.date}</td>
-                    </tr>
-                  </tbody>
-                </Table>
+      {appointments.map((appointment) => {
+        console.log(appointment, "llllllllllllllllllll");
+        return (
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>
+                {appointment.firstName} {appointment.lastName}
+              </Card.Title>
+              <Card.Text>{appointment.email}</Card.Text>
+              <Card.Text>{appointment.timeStamp}</Card.Text>
+              <div className="response">
+                <Button variant="primary" className="accept">
+                  Accept
+                </Button>
+                <Button variant="primary" className="reject">
+                  Reject
+                </Button>
               </div>
-              {/* <div className="but_table"> */}
-              <Button variant="primary" className="but_table">
-                Accept{" "}
-              </Button>
-              <Button variant="primary" className="but_table">
-                Reject{" "}
-              </Button>
-              {/* </div> */}
-            </div>
-          );
-        })}
-      </div>
+            </Card.Body>
+          </Card>
+        );
+      })}
     </>
   );
 };

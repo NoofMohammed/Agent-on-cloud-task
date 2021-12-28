@@ -56,7 +56,7 @@ const Register = () => {
       .post(`http://localhost:5000/${userType}`, data)
       .then((result) => {
         setError(null);
-        console.log(result.data, "seeler");
+        console.log(result.data, "register");
         navigate(`/login/${userType}`);
       })
       .catch((err) => {

@@ -11,7 +11,7 @@ import Login from "./components/Login/index";
 import Register from "./components/Register/index";
 import ShowSellers from "./components/Seller";
 import AppointmentRequest from "./components/AppointmentRequest";
-import Appointment from "./components/appointment";
+import Booking from "./components/Booking";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -32,13 +32,13 @@ const App = () => {
           />
           <Route
             exact
-            path="/allRequest/:seller_id"
+            path="/myRequest/:sellerId"
             element={!token ? <Navigate to="/" /> : <AppointmentRequest />}
           />
           <Route
             exact
-            path="booking"
-            element={!token ? <Navigate to="/" /> : <Appointment />}
+            path="/booking/:sellerId"
+            element={!token ? <Navigate to="/" /> : <Booking />}
           />
         </Routes>
       </Router>
