@@ -5,15 +5,13 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   let { email, password, userType } = req.body;
   const data = [email];
-  const salt = 10;
 
   const query = `SELECT * FROM ${userType} WHERE email = ?`;
 
   connection.query(query, data, async (err, result) => {
-    if (!result) {
+    if (!result[0]) {
       return res.status(404).json("the email doesn't exist");
     }
-    console.log(password, result[0].password, "jjjjjjjjjjjj");
     const confirm = await bcrypt.compare(password, result[0].password);
     if (confirm) {
       const payload = {

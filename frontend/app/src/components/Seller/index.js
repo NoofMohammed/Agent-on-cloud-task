@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Card, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
-import "./seller.css";
+import "./style.css";
 import { useNavigate } from "react-router-dom";
+
+//show all sellers to buyer
 const ShowSellers = () => {
   const navigate = useNavigate();
   const [sellers, setSellers] = useState([]);
-  // const [sellerId, setSellerId] = useState("");
   const getSellers = (goods) => {
     const token = localStorage.getItem("token");
     const headers = {
@@ -20,7 +21,6 @@ const ShowSellers = () => {
       .get(url, { headers })
       .then((result) => {
         setSellers(result.data);
-        console.log(sellers, "seller");
       })
       .catch((err) => {
         console.log(err);
@@ -31,11 +31,10 @@ const ShowSellers = () => {
   }, []);
 
   let timeOut;
+
   const searchBy = (goods) => {
     clearTimeout(timeOut);
-    console.log("kkkkkkkk");
     timeOut = setTimeout(() => {
-      console.log(goods);
       getSellers(goods);
     }, 1000);
   };
@@ -45,6 +44,7 @@ const ShowSellers = () => {
   return (
     <>
       <FormControl
+        className="input_search"
         placeholder="Search"
         aria-label="Search"
         aria-describedby="basic-addon2"
@@ -70,7 +70,7 @@ const ShowSellers = () => {
                       <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     </svg>{" "}
                   </span>
-                  {seller.firstName} {seller.lastName}
+                  {seller.first_name} {seller.last_name}
                 </Card.Title>
                 <Card.Text>
                   <span>

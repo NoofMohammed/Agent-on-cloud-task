@@ -1,14 +1,13 @@
-button.but_table.btn.btn-primary {
-  width: 11%;
-  color: black;
-
-  height: 42px;
-}
 .container {
   display: flex;
   justify-content: space-around;
 }
-.response {
+
+.img_welcome {
+  display: flex;
+  justify-content: center;
+}
+.image {
   display: flex;
   justify-content: space-between;
 }

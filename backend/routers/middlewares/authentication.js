@@ -8,7 +8,6 @@ const authentication = (req, res, next) => {
     const token = req.headers.authorization.split(" ").pop();
     const decoded = jwt.verify(token, process.env.SECRET);
     req.userId = decoded.userId;
-    console.log(decoded, "decoded");
     next();
   } catch (error) {
     res.status(403).json({ message: error.message });

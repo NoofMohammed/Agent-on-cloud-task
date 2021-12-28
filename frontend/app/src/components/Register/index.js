@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import "./style.css";
 import { useParams, useNavigate } from "react-router-dom";
-
+//register for seller and buyer
 const Register = () => {
   const navigate = useNavigate();
 
@@ -17,8 +17,6 @@ const Register = () => {
   const [goods_type, setGoods_type] = useState("");
   const [img, setImg] = useState("");
   const [error, setError] = useState(null);
-
-  console.log(userType, "userType");
 
   const validateData = () => {
     let data = {
@@ -46,7 +44,6 @@ const Register = () => {
   };
   const newUser = () => {
     const data = validateData();
-    console.log({ data });
     if (!data) {
       setError("Please fill all fields");
       return;
@@ -56,7 +53,6 @@ const Register = () => {
       .post(`http://localhost:5000/${userType}`, data)
       .then((result) => {
         setError(null);
-        console.log(result.data, "register");
         navigate(`/login/${userType}`);
       })
       .catch((err) => {
@@ -150,7 +146,7 @@ const Register = () => {
             </Form.Group>
           </div>
         ) : null}
-        <div>
+        <div className="register-but">
           <Button
             variant="primary"
             // type="submit"

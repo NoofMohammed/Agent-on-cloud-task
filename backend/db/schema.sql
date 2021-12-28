@@ -2,8 +2,8 @@ USE appointments;
 
 CREATE TABLE seller (
     id INT AUTO_INCREMENT NOT NULL,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     location VARCHAR(255),
@@ -13,15 +13,15 @@ CREATE TABLE seller (
 );
 CREATE TABLE buyer (
     id INT AUTO_INCREMENT NOT NULL,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     PRIMARY KEY (id)
 );
 CREATE TABLE appointment (
     id INT AUTO_INCREMENT NOT NULL,
-    timeStamp TIMESTAMP,
+    date DATETIME,
     state VARCHAR(255),
     seller_id INT,
     FOREIGN KEY (seller_id) REFERENCES seller(id),

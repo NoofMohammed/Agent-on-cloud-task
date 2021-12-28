@@ -1,13 +1,13 @@
 const connection = require("../../db/db");
 // creat appointment for booking appointment
 const creatAppointment = (req, res) => {
-  const { timeStamp, state, buyer_id, seller_id } = req.body;
-  console.log(req.body, "ffffffffffffffffffffffffffffff");
-  const data = [timeStamp, state, buyer_id, seller_id];
+  const { timeStamp, state, buyerId, sellerId } = req.body;
+  const data = [timeStamp, state, buyerId, sellerId];
   const query =
-    "INSERT INTO appointment ( timeStamp, state, buyer_id, seller_id) VALUES (?,?,?,?)";
+    "INSERT INTO appointment ( date, state, buyer_id, seller_id) VALUES (?,?,?,?)";
   connection.query(query, data, (err, result) => {
     if (err) {
+      console.log(err);
       return res.json({ message: err.message });
     }
     res.json(result);
@@ -30,6 +30,7 @@ const allAppointment = (req, res) => {
   FROM buyer 
   INNER JOIN appointment
   ON  buyer.id = appointment.buyer_id
+
   WHERE seller_id =${seller_id}`;
   connection.query(query, seller_id, (err, result) => {
     if (err) {
@@ -41,9 +42,24 @@ const allAppointment = (req, res) => {
 //get appointment by id
 const getAppointmentById = (req, res) => {
   const id = req.params.id;
-  const query = `SELECT * FROM appointment WHERE id=?`;
+  const query = `SELECT * FROM appointment WHERE buyer_id=?`;
   connection.query(query, [id], (err, result) => {
     if (err) {
+      return res.json({ message: err.message });
+    }
+    res.json(result);
+  });
+};
+
+const updateAppointmentById = (req, res) => {
+  const { id } = req.params;
+  const { state } = req.body;
+
+  const query = `UPDATE appointment SET state = ? WHERE id = ${id}
+  `;
+  connection.query(query, [state], (err, result) => {
+    if (err) {
+      console.log(err);
       return res.json({ message: err.message });
     }
     res.json(result);
@@ -55,4 +71,5 @@ module.exports = {
   getAllAppointment,
   getAppointmentById,
   allAppointment,
+  updateAppointmentById,
 };

@@ -1,23 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./home.css";
+import "./style.css";
 
 const Home = () => {
   const token = localStorage.getItem("token");
 
   return (
     <>
-      <div>
+      <div className="img_welcome">
         <img src="welcome.jpg" alt="welcome" />
       </div>
-      <div className="image">
-        <Link to="/login/seller">
-          <img src="seller.jpg" style={{ width: "17%" }} alt="seller" />
-        </Link>
-        <Link to="/login/buyer">
-          <img src="buyer.jpg" style={{ width: "17%" }} alt="buyer" />
-        </Link>
+      <div className="container">
+        <div className="image">
+          <Link to="/login/seller" className="seller">
+            <img src="seller.jpg" alt="seller" />
+          </Link>
+          <Link to="/login/buyer">
+            <img src="buyer.jpg" alt="buyer" className="buyer" />
+          </Link>
+        </div>
       </div>
     </>
   );

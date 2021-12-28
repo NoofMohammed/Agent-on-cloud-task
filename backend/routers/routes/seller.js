@@ -10,6 +10,6 @@ const {
 
 sellerRouter.post("/", registerSeller);
 sellerRouter.get("/", authentication, getAllSeller);
-sellerRouter.get("/:id", getSellerById);
+sellerRouter.get("/:id", authentication, getSellerById);
 
 module.exports = sellerRouter;

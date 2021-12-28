@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log({ userType });
+
   const login = () => {
     axios
       .post(`http://localhost:5000/login`, {
@@ -19,12 +19,9 @@ const Login = () => {
       })
       .then((result) => {
         const { data } = result;
-        console.log(data, "seeler");
-        console.log(data.userId, "user.id");
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         if (userType === "seller") {
-          console.log("llll");
           navigate(`/myRequest/${data.userId}`);
         }
         if (userType === "buyer") {
@@ -64,14 +61,16 @@ const Login = () => {
             />
           </Form.Group>
           <div className="buttons">
-            <Link to={`/register/${userType}`}>
-              <Button variant="primary" className="register">
-                Register
+            <div className="register">
+              <Link to={`/register/${userType}`}>
+                <Button variant="primary">Register</Button>
+              </Link>
+            </div>
+            <div className="login_but">
+              <Button variant="primary" onClick={login}>
+                Login
               </Button>
-            </Link>
-            <Button variant="primary" className="login" onClick={login}>
-              Login
-            </Button>
+            </div>
           </div>
         </Form>
       </div>

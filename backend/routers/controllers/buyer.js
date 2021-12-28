@@ -7,9 +7,10 @@ const registerBuyer = async (req, res) => {
   password = await bcrypt.hash(password, salt);
   const data = [firstName, lastName, password, email];
   const query =
-    "INSERT INTO buyer (firstName, lastName, password, email) VALUES (?,?,?,?)";
+    "INSERT INTO buyer (first_name, last_name, password, email) VALUES (?,?,?,?)";
   connection.query(query, data, (err, result) => {
     if (err) {
+      console.log(err);
       return res.json({ message: err.message });
     }
     res.json(result);

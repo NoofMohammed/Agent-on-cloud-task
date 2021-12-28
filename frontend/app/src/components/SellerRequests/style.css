@@ -1,0 +1,20 @@
+button.but_table.btn.btn-primary {
+  width: 11%;
+  color: black;
+
+  height: 42px;
+}
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+.response {
+  display: flex;
+  justify-content: space-between;
+}
+
+.appointments {
+  display: flex;
+  justify-content: space-around;
+  padding: 62px;
+}

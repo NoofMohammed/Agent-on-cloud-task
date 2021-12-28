@@ -17,7 +17,7 @@ const registerSeller = async (req, res) => {
     img,
   ];
   const query =
-    "INSERT INTO seller (firstName, lastName, email, password, location, goods_type,img) VALUES (?,?,?,?,?,?,?);";
+    "INSERT INTO seller (first_name, last_name, email, password, location, goods_type,img) VALUES (?,?,?,?,?,?,?);";
   connection.query(query, data, (err, result) => {
     if (err) {
       return res.json({ message: err.message });

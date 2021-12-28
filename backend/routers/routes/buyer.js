@@ -1,6 +1,9 @@
 // buyerRouter
 const express = require("express");
+const authentication = require("../middlewares/authentication");
+
 const buyerRouter = express.Router();
+
 const {
   registerBuyer,
   getAllBuyer,
@@ -8,7 +11,7 @@ const {
 } = require("../controllers/buyer");
 
 buyerRouter.post("/", registerBuyer);
-buyerRouter.get("/", getAllBuyer);
-buyerRouter.get("/:id", getBuyerById);
+buyerRouter.get("/", authentication, getAllBuyer);
+buyerRouter.get("/:id", authentication, getBuyerById);
 
 module.exports = buyerRouter;

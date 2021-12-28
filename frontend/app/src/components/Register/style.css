@@ -18,3 +18,7 @@ button.register.btn.btn-primary {
 .error {
   color: red;
 }
+.register-but {
+  display: flex;
+  justify-content: center;
+}
