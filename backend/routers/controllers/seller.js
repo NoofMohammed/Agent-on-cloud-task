@@ -16,7 +16,6 @@ const registerSeller = async (req, res) => {
     goods_type,
     img,
   ];
-  console.log(password, "password");
   const query =
     "INSERT INTO seller (firstName, lastName, email, password, location, goods_type,img) VALUES (?,?,?,?,?,?,?);";
   connection.query(query, data, (err, result) => {
@@ -24,7 +23,6 @@ const registerSeller = async (req, res) => {
       return res.json({ message: err.message });
     }
 
-    console.log("vvf", result);
     res.json(result);
   });
 };
@@ -36,7 +34,9 @@ const getAllSeller = (req, res) => {
 
   const goodsSearched = goods ? [`%${goods}%`] : [`%`];
   connection.query(query, goodsSearched, (err, result) => {
-    if (err) throw err;
+    if (err) {
+      return res.json({ message: err.message });
+    }
     res.json(result);
   });
 };
@@ -44,11 +44,11 @@ const getAllSeller = (req, res) => {
 // get seller based on id
 const getSellerById = (req, res) => {
   const id = req.params.id;
-  console.log(id, "iiidddd");
   const query = `SELECT * FROM seller WHERE id=?`;
   connection.query(query, [id], (err, result) => {
-    if (err) throw err;
-    console.log(result, "result");
+    if (err) {
+      return res.json({ message: err.message });
+    }
     res.json(result);
   });
 };

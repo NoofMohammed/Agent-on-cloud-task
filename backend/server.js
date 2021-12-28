@@ -18,7 +18,6 @@ app.use("/appointment", appointmentRouter);
 app.use("/booking", bookingRouter);
 
 const PORT = process.env.PORT;
-console.log(PORT, "llllllllllll");
 app.listen(PORT, () => {
   console.log(`Server On ${PORT}`);
 });

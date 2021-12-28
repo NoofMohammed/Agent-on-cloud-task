@@ -1,5 +1,5 @@
 const connection = require("../../db/db");
-
+// creat appointment for booking appointment
 const creatAppointment = (req, res) => {
   const { time, date, buyer_id, seller_id } = req.body;
   const data = [time, date, buyer_id, seller_id];
@@ -12,7 +12,7 @@ const creatAppointment = (req, res) => {
     res.json(result);
   });
 };
-
+// get all appointment
 const getAllAppointment = (req, res) => {
   const query = "SELECT * from appointment";
   connection.query(query, (err, result) => {
@@ -22,6 +22,7 @@ const getAllAppointment = (req, res) => {
     res.json(result);
   });
 };
+// get all data buyer and appointment
 const allAppointment = (req, res) => {
   const { seller_id } = req.params;
   const query = `SELECT *
@@ -36,7 +37,7 @@ const allAppointment = (req, res) => {
     res.json(result);
   });
 };
-
+//get appointment by id
 const getAppointmentById = (req, res) => {
   const id = req.params.id;
   const query = `SELECT * FROM appointment WHERE id=?`;

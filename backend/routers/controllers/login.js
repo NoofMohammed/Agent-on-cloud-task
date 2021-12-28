@@ -1,7 +1,7 @@
 const connection = require("../../db/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+// login for buyer and seller
 const login = async (req, res) => {
   let { email, password, userType } = req.body;
   const data = [email];
