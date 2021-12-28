@@ -1,0 +1,20 @@
+form.form_register {
+  width: 45%;
+  padding: 47px;
+  border: solid 1px rgb(219 222 225);
+  border-radius: 5px;
+}
+.forms {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+button.register.btn.btn-primary {
+  width: 35%;
+  color: black;
+  background-color: snow;
+  border-color: brown;
+}
+.error {
+  color: red;
+}

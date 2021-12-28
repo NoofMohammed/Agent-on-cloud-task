@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import "./registerSeller.css";
+import "./style.css";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -16,47 +16,63 @@ const Register = () => {
   const [location, setLocation] = useState("");
   const [goods_type, setGoods_type] = useState("");
   const [img, setImg] = useState("");
+  const [error, setError] = useState(null);
 
-  const newUser = () => {
-    console.log(userType, "userType");
+  console.log(userType, "userType");
 
-    console.log("dddd");
-    if (
-      firstName &&
-      lastName &&
-      email &&
-      password &&
-      location &&
-      goods_type &&
-      img
-    ) {
-      axios
-        .post("http://localhost:5000/seller", {
-          firstName,
-          lastName,
-          email,
-          password,
-          location,
-          goods_type,
-          img,
-        })
-        .then((result) => {
-          console.log(result.data, "seeler");
-          navigate(`/login/${userType}`);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const validateData = () => {
+    let data = {
+      firstName,
+      lastName,
+      email,
+      password,
+      location,
+      goods_type,
+      img,
+    };
+    if (userType !== "seller") {
+      data = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
     }
+    const allfilled = Object.values(data).every((field) => field);
+    if (allfilled) {
+      return data;
+    }
+    return false;
+  };
+  const newUser = () => {
+    const data = validateData();
+    console.log({ data });
+    if (!data) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    axios
+      .post(`http://localhost:5000/${userType}`, data)
+      .then((result) => {
+        setError(null);
+        console.log(result.data, "seeler");
+        navigate(`/login/${userType}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div>
-      <Form>
+    <div className="forms">
+      <Form className="form_register">
         <Form.Group className="mb-3">
           <Form.Label>First name</Form.Label>
           <Form.Control
             type="text"
+            required
+            className="required"
             placeholder="Enter first name"
             onChange={(e) => {
               setFirstName(e.target.value);
@@ -75,7 +91,7 @@ const Register = () => {
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -134,10 +150,17 @@ const Register = () => {
             </Form.Group>
           </div>
         ) : null}
-
-        <Button variant="primary" onClick={newUser}>
-          Register
-        </Button>
+        <div>
+          <Button
+            variant="primary"
+            // type="submit"
+            className="register"
+            onClick={newUser}
+          >
+            Register
+          </Button>
+        </div>
+        <div className="error">{error}</div>
       </Form>
     </div>
   );

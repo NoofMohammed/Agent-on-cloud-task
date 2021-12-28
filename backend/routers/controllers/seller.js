@@ -31,8 +31,11 @@ const registerSeller = async (req, res) => {
 
 // get all seller
 const getAllSeller = (req, res) => {
-  const query = "SELECT * FROM seller";
-  connection.query(query, (err, result) => {
+  const { goods } = req.query;
+  const query = `SELECT * FROM seller WHERE goods_type LIKE ?`;
+
+  const goodsSearched = goods ? [`%${goods}%`] : [`%`];
+  connection.query(query, goodsSearched, (err, result) => {
     if (err) throw err;
     res.json(result);
   });

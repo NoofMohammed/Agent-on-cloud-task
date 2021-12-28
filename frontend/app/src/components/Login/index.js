@@ -9,8 +9,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  console.log({ userType });
   const login = () => {
-    console.log("yyyysssssssssssssssssssssssssssss");
     axios
       .post("http://localhost:5000/login", {
         email,
@@ -18,12 +18,12 @@ const Login = () => {
         userType: userType,
       })
       .then((result) => {
+        const { data } = result;
         console.log(result, "seeler");
-        console.log(result.data.user.id, "result.user.id");
-        navigate(`/allRequest/${result.data.user.id}`);
+        console.log(data.userId, "user.id");
+        localStorage.setItem("token", data.token);
         if (userType === "seller") {
-          // console.log(result.data.user.id, "result.user.id");
-          // navigate(`/allRequest/${result.data.user.id}`);
+          navigate(`/allRequest/${data.userId}`);
         }
         if (userType === "buyer") {
           navigate("/allSeller");
@@ -67,7 +67,7 @@ const Login = () => {
                 Register
               </Button>
             </Link>
-            <Button variant="primary" onClick={login}>
+            <Button variant="primary" className="login" onClick={login}>
               Login
             </Button>
           </div>

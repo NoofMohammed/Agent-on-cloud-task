@@ -1,7 +1,10 @@
+const bcrypt = require("bcrypt");
 const connection = require("../../db/db");
 
-const registerBuyer = (req, res) => {
-  const { firstName, lastName, password, email } = req.body;
+const registerBuyer = async (req, res) => {
+  let { firstName, lastName, password, email } = req.body;
+  const salt = 10;
+  password = await bcrypt.hash(password, salt);
   const data = [firstName, lastName, password, email];
   const query =
     "INSERT INTO buyer (firstName, lastName, password, email) VALUES (?,?,?,?)";
